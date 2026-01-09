@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion"; // Install via: npm install framer-motion
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -8,21 +8,16 @@ export default function Landing() {
   const [heroIndex, setHeroIndex] = useState(0);
 
   const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_5kQ9AVfjTdwdcvmeVIeZ201";
-
-  const handleBuyNow = () => {
-    window.location.href = STRIPE_PAYMENT_LINK;
-  };
+  const handleBuyNow = () => window.location.href = STRIPE_PAYMENT_LINK;
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setHeroIndex((prev) => (prev + 1) % 5);
-    }, 5000);
+    const interval = setInterval(() => setHeroIndex(prev => (prev + 1) % 5), 5000);
     return () => clearInterval(interval);
   }, []);
 
   const heroImages = [
     "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1600",
-    "https://images.unsplash.com/photo-1527236438218-d82077ae1f85?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhlYWRhY2hlfGVufDB8fDB8fHww",
+    "https://images.unsplash.com/photo-1527236438218-d82077ae1f85?w=600&auto=format&fit=crop&q=60",
     "https://images.unsplash.com/photo-1599058917212-d750089bc07c?q=80&w=1600",
     "https://images.unsplash.com/photo-1611078489935-0cb964de46c0?q=80&w=1600",
     "https://images.unsplash.com/photo-1542736667-069246bdbc94?q=80&w=1600",
@@ -76,8 +71,8 @@ export default function Landing() {
     <div className="bg-[#05010d] text-slate-100 selection:bg-purple-500/30">
       <Navbar lang={lang} setLang={setLang} />
 
-      {/* HERO SECTION */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+      {/* HERO */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={heroIndex}
@@ -85,64 +80,37 @@ export default function Landing() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5 }}
-            className="absolute inset-0 z-0"
-            style={{ backgroundImage: `url(${heroImages[heroIndex]})`, backgroundSize: "cover", backgroundPosition: "center" }}
+            className="absolute inset-0 z-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${heroImages[heroIndex]})` }}
           />
         </AnimatePresence>
-        
-        {/* Advanced Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#05010d] z-1" />
-        
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            className="inline-block px-4 py-1.5 mb-6 border border-purple-500/30 bg-purple-500/10 backdrop-blur-md rounded-full text-purple-300 text-sm font-medium"
-          >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#05010d]" />
+        <div className="relative z-10 max-w-4xl text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="inline-block px-3 py-1 mb-4 border border-purple-500/30 bg-purple-500/10 backdrop-blur-md rounded-full text-purple-300 text-sm sm:text-base font-medium">
             {c.heroNote}
           </motion.div>
-          
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-purple-400"
-          >
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-purple-400">
             {c.heroTitle}
           </motion.h1>
-
-          <motion.p 
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-            className="text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed">
             {c.heroDesc}
           </motion.p>
-
-          <motion.button 
-            whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-            onClick={handleBuyNow} 
-            className="group relative px-10 py-5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 font-bold text-xl shadow-[0_0_40px_-10px_rgba(168,85,247,0.5)] overflow-hidden"
-          >
-            <span className="relative z-10">{c.buyBtn}</span>
-            <div className="absolute inset-0 bg-white/20 translate-y-12 group-hover:translate-y-0 transition-transform duration-300" />
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleBuyNow} className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 font-bold text-lg sm:text-xl shadow-lg overflow-hidden">
+            {c.buyBtn}
           </motion.button>
         </div>
       </section>
 
-      {/* PAIN AREAS - Cards with Hover Glow */}
-      <section id="product" className="py-32 px-6 max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-16 italic underline decoration-purple-500/50 underline-offset-8">
-            {lang === 'mr' ? 'कोणत्या वेदनांवर प्रभावी?' : 'Effective for?'}
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* PAIN AREAS */}
+      <section id="product" className="py-20 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 italic underline decoration-purple-500/50 underline-offset-8">{lang === "mr" ? "कोणत्या वेदनांवर प्रभावी?" : "Effective for?"}</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {painImages.map((p, i) => (
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-              className="group bg-slate-900/50 border border-white/5 rounded-3xl overflow-hidden hover:border-purple-500/50 transition-all duration-500"
-            >
-              <div className="h-56 overflow-hidden">
-                <img src={p.img} alt={p.title} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" />
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group bg-slate-900/50 border border-white/5 rounded-2xl overflow-hidden hover:border-purple-500/50 transition-all duration-500">
+              <div className="h-48 sm:h-56 md:h-64 overflow-hidden">
+                <img src={p.img} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
-              <div className="p-6 text-center text-lg font-bold bg-gradient-to-b from-transparent to-black/40">
+              <div className="p-4 sm:p-6 text-center font-bold text-base sm:text-lg bg-gradient-to-b from-transparent to-black/40">
                 {p.title}
               </div>
             </motion.div>
@@ -150,58 +118,48 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ABOUT - Horizontal Bento Grid Style */}
-      <section id="about" className="py-32 relative">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-purple-300 mb-6">{c.aboutTitle}</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">{c.aboutDesc}</p>
+      {/* ABOUT */}
+      <section id="about" className="py-20 sm:py-28 px-4 sm:px-6 md:px-8">
+        <div className="max-w-6xl mx-auto text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold text-purple-300 mb-4 sm:mb-6">{c.aboutTitle}</h2>
+          <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto">{c.aboutDesc}</p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-4">
+          {c.features.map((f, i) => (
+            <div key={i} className="px-4 sm:px-6 py-3 sm:py-4 bg-white/5 rounded-2xl border border-white/10 flex items-center gap-2 sm:gap-3 hover:bg-white/10 transition">
+              <span className="text-green-400 text-lg sm:text-xl font-bold">✓</span>
+              <span className="font-medium text-gray-200 text-sm sm:text-base">{f}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* USAGE & DOCTOR QUOTE */}
+      <section id="doctor" className="py-20 sm:py-28 px-4 sm:px-6 md:px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
+          <div className="p-6 sm:p-10 rounded-2xl bg-gradient-to-br from-purple-900/20 to-transparent border border-purple-500/20 shadow-lg">
+            <h3 className="text-2xl sm:text-3xl font-bold text-purple-300 mb-4">{c.usageTitle}</h3>
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed italic">{c.usage}</p>
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-4">
-            {c.features.map((f, i) => (
-              <div key={i} className="px-6 py-4 bg-white/5 rounded-2xl border border-white/10 flex items-center gap-3 hover:bg-white/10 transition">
-                <span className="text-green-400 text-xl font-bold">✓</span>
-                <span className="font-medium text-gray-200">{f}</span>
-              </div>
-            ))}
+          <div className="text-center md:text-left mt-6 md:mt-0">
+            <div className="mb-4 text-5xl sm:text-6xl text-purple-500 opacity-50">“</div>
+            <blockquote className="text-xl sm:text-2xl font-light text-slate-200 mb-4 sm:mb-6 leading-relaxed">{c.doctorQuote}</blockquote>
+            <div className="flex items-center justify-center md:justify-start gap-2 sm:gap-4">
+              <div className="w-12 h-px bg-purple-500" />
+              <p className="text-purple-400 uppercase tracking-widest text-xs sm:text-sm font-bold">Orthopedic Doctors, Pune</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* USAGE & QUOTE - Elegant Split Section */}
-      <section id="doctor" className="py-32 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div className="p-10 rounded-3xl bg-gradient-to-br from-purple-900/20 to-transparent border border-purple-500/20 shadow-2xl">
-                <h2 className="text-3xl font-bold text-purple-300 mb-6 underline decoration-purple-500/30">{c.usageTitle}</h2>
-                <p className="text-xl text-gray-300 leading-relaxed italic">"{c.usage}"</p>
+      {/* MARKETING STRIP */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 md:px-8 bg-purple-600/5 border-t border-b border-purple-500/10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+          {marketingTaglines.map((tag, i) => (
+            <div key={i} className="p-4 sm:p-6 text-center rounded-xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-all duration-300 cursor-default">
+              <p className="text-gray-300 text-sm sm:text-base">{tag}</p>
             </div>
-            
-            <div className="text-center md:text-left">
-                <div className="mb-6 text-5xl text-purple-500 opacity-50">“</div>
-                <blockquote className="text-2xl font-light text-slate-200 mb-6 leading-relaxed">
-                  {c.doctorQuote}
-                </blockquote>
-                <div className="flex items-center gap-4 justify-center md:justify-start">
-                    <div className="w-12 h-1px bg-purple-500" />
-                    <p className="text-purple-400 uppercase tracking-widest text-sm font-bold">Orthopedic Doctors, Pune</p>
-                </div>
-            </div>
-        </div>
-      </section>
-
-      {/* MARKETING STRIP - Moving text feel */}
-      <section className="py-24 bg-purple-600/5 border-y border-purple-500/10 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-center text-sm uppercase tracking-[0.3em] text-purple-500 mb-12 font-black">Premium Quality Benefits</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {marketingTaglines.map((tag, i) => (
-                <div key={i} className="group p-6 text-center rounded-2xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-all duration-300 cursor-default">
-                   <p className="text-gray-300 group-hover:text-white font-medium">{tag}</p>
-                </div>
-            ))}
-            </div>
+          ))}
         </div>
       </section>
 
