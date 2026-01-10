@@ -174,75 +174,70 @@ const painImages = [
       <Navbar lang={lang} setLang={setLang} />
 
       {/* ================= HERO ================= */}
-   {/* ================= VIDEO HERO ================= */}
-<section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center px-4">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={heroIndex}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.6 }}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${heroImages[heroIndex]})` }}
+          />
+        </AnimatePresence>
 
-  {/* Background Video */}
-  <video
-    autoPlay
-    muted
-    loop
-    playsInline
-    poster="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1600"
-    className="absolute inset-0 w-full h-full object-cover"
-  >
-    <source src="/hero.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/85 to-white" />
 
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white backdrop-blur-sm" />
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          className="relative z-10 max-w-4xl text-center"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="inline-block px-4 py-1 mb-5 rounded-full bg-indigo-100 text-indigo-700 text-sm font-semibold"
+          >
+            {c.heroNote}
+          </motion.div>
 
-  {/* Content */}
-  <motion.div
-    initial="hidden"
-    animate="visible"
-    className="relative z-10 max-w-4xl text-center"
-  >
-    <motion.div
-      variants={fadeUp}
-      className="inline-block px-4 py-1 mb-5 rounded-full bg-indigo-100 text-indigo-700 text-sm font-semibold"
-    >
-      {c.heroNote}
-    </motion.div>
+          <motion.h1
+            variants={fadeUp}
+            custom={2}
+            className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-indigo-800"
+          >
+            {c.heroTitle}
+          </motion.h1>
 
-    <motion.h1
-      variants={fadeUp}
-      custom={2}
-      className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-indigo-800"
-    >
-      {c.heroTitle}
-    </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            custom={3}
+            className="text-lg text-gray-600 mb-3"
+          >
+            {c.heroDesc}
+          </motion.p>
 
-    <motion.p
-      variants={fadeUp}
-      custom={3}
-      className="text-lg text-gray-600 max-w-2xl mx-auto mb-3"
-    >
-      {c.heroDesc}
-    </motion.p>
+          <motion.p
+            variants={fadeUp}
+            custom={4}
+            className="text-gray-500 mb-10"
+          >
+            {c.heroExtra}
+          </motion.p>
 
-    <motion.p
-      variants={fadeUp}
-      custom={4}
-      className="text-gray-500 max-w-xl mx-auto mb-10"
-    >
-      {c.heroExtra}
-    </motion.p>
-
-    <motion.button
-      whileHover={{ scale: 1.06 }}
-      whileTap={{ scale: 0.96 }}
-      animate={{ y: [0, -6, 0] }}
-      transition={{ repeat: Infinity, duration: 2 }}
-      onClick={handleBuyNow}
-      className="px-12 py-4 rounded-xl bg-indigo-600 text-white font-bold text-lg shadow-xl hover:bg-indigo-700"
-    >
-      {c.buyBtn}
-    </motion.button>
-  </motion.div>
-</section>
-
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            animate={{ y: [0, -6, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            onClick={handleBuyNow}
+            className="px-12 py-4 rounded-xl bg-indigo-600 text-white font-bold text-lg shadow-xl hover:bg-indigo-700"
+          >
+            {c.buyBtn}
+          </motion.button>
+        </motion.div>
+      </section>
 
       {/* ================= ABOUT ================= */}
       <section className="py-24 px-4 bg-indigo-100">
