@@ -7,6 +7,10 @@ export default function Navbar({ lang, setLang }) {
   const toggleLanguage = () => {
     setLang(lang === "mr" ? "en" : "mr");
   };
+    const STRIPE_PAYMENT_LINK =
+    "https://buy.stripe.com/test_5kQ9AVfjTdwdcvmeVIeZ201";
+  const handleBuyNow = () => (window.location.href = STRIPE_PAYMENT_LINK);
+
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur border-b border-gray-200 shadow-sm">
@@ -22,7 +26,7 @@ export default function Navbar({ lang, setLang }) {
           <a href="#home" className="hover:text-indigo-600 transition">Home</a>
           <a href="#about" className="hover:text-indigo-600 transition">About</a>
           <a href="#product" className="hover:text-indigo-600 transition">Product</a>
-          <a href="#doctor" className="hover:text-indigo-600 transition">Doctor</a>
+          <a href="#contact" className="hover:text-indigo-600 transition">Contact</a>
         </div>
 
         {/* Language + Buy Now */}
@@ -34,7 +38,8 @@ export default function Navbar({ lang, setLang }) {
             {lang === "mr" ? "English" : "मराठी"}
           </button>
 
-          <button className="px-5 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-teal-500 text-white font-semibold shadow-md hover:scale-105 transition">
+          <button onClick={handleBuyNow}
+           className="px-5 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-teal-500 text-white font-semibold shadow-md hover:scale-105 transition">
             Buy Now
           </button>
         </div>
@@ -82,15 +87,15 @@ export default function Navbar({ lang, setLang }) {
             Product
           </a>
           <a
-            href="#doctor"
+            href="#contact"
             className="block px-6 py-4 text-gray-800 hover:bg-gray-100 transition"
             onClick={() => setMenuOpen(false)}
           >
-            Doctor
+            Contact
           </a>
 
           <button
-            onClick={() => setMenuOpen(false)}
+            onClick={() => setMenuOpen(false) || handleBuyNow()}
             className="block w-[90%] mx-auto px-6 py-3 my-4 rounded-full bg-gradient-to-r from-indigo-500 to-teal-500 text-white font-semibold shadow-md hover:scale-105 transition"
           >
             Buy Now

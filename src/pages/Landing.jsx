@@ -128,6 +128,11 @@ const painImages = [
         "“Suvam Oil नियमित वापरल्यास सांधेदुखी व स्नायूंच्या वेदनांमध्ये आराम मिळतो.”",
 
       buyBtn: "₹150 मध्ये खरेदी करा",
+      consultTitle: "अधिक सल्ल्यासाठी संपर्क करा",
+consultDesc:
+  "आपल्या वेदनांबाबत योग्य मार्गदर्शन व सल्ल्यासाठी आमच्याशी थेट संपर्क साधा.",
+consultBtn: "WhatsApp वर संपर्क करा",
+callBtn: "आत्ताच कॉल करा",
     },
 
     en: {
@@ -164,6 +169,11 @@ const painImages = [
         "“Regular use of Suvam Oil helps reduce joint pain and improves mobility.”",
 
       buyBtn: "Buy Now @ ₹150",
+      consultTitle: "Connect With Us for Consultation",
+consultDesc:
+  "For proper guidance and consultation regarding your pain, connect with us directly.",
+consultBtn: "Connect on WhatsApp",
+callBtn: "Call Now",
     },
   };
 
@@ -174,7 +184,7 @@ const painImages = [
       <Navbar lang={lang} setLang={setLang} />
 
       {/* ================= HERO ================= */}
-      <section className="relative min-h-screen flex items-center justify-center px-4">
+      <section id="home" className="relative min-h-screen flex items-center justify-center px-4">
         <AnimatePresence mode="wait">
           <motion.div
             key={heroIndex}
@@ -240,7 +250,7 @@ const painImages = [
       </section>
 
       {/* ================= ABOUT ================= */}
-      <section className="py-24 px-4 bg-indigo-100">
+      <section id="about" className="py-24 px-4 bg-indigo-100">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -276,7 +286,7 @@ const painImages = [
       </section>
 
       {/* ================= PAIN SLIDER ================= */}
-      <section className="py-20 px-4 max-w-7xl mx-auto">
+      <section id="product" className="py-20 px-4 max-w-7xl mx-auto">
         <motion.h2
           initial="hidden"
           whileInView="visible"
@@ -327,6 +337,48 @@ const painImages = [
           ))}
         </div>
       </section>
+      {/* CONSULTATION SECTION */}
+<section id="contact" className="py-24 px-4 bg-gradient-to-br from-indigo-50 to-white">
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+    className="max-w-5xl mx-auto text-center"
+  >
+    <h2 className="text-4xl font-extrabold text-indigo-800 mb-4">
+      {c.consultTitle}
+    </h2>
+
+    <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-10">
+      {c.consultDesc}
+    </p>
+
+    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+  {/* WhatsApp */}
+  <a
+    href="https://wa.me/917350767410"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-green-500 text-white font-bold text-lg hover:bg-green-600 transition"
+  >
+    💬 {c.consultBtn}
+  </a>
+
+  {/* Call Now */}
+  <motion.a
+    href="tel:+917350767410"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 transition"
+  >
+    📞 {c.callBtn}
+  </motion.a>
+</div>
+
+  </motion.div>
+</section>
+
 
       <Footer />
     </div>
